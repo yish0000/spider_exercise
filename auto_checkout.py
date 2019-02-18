@@ -66,9 +66,11 @@ def run():
     browser.get(INDEX_URL)
     if browser.find_element_by_class_name('signIn1').is_displayed():
         checkin()
-    else:
+    elif browser.find_element_by_class_name('signOut1').is_displayed():
         checkout()
         checkout_confirm()
+    else:
+        print("Invalid state!")
 
 def main():
     open_driver()
