@@ -22,7 +22,7 @@ def login(user, password):
     browser.find_element_by_id("login_user").send_keys(user)
     browser.find_element_by_id("login_pswd").send_keys(password)
     browser.find_element_by_id("login_btn").click()
-    WebDriverWait(browser, 10)
+    WebDriverWait(browser, 3)
 
 def checkin():
     browser.execute_script("DoSignIn();")
