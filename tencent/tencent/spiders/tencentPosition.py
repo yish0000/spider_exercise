@@ -12,19 +12,22 @@ class TencentpositionSpider(scrapy.Spider):
 
 	def parse(self, response):
 		for each in response.xpath("//tr[@class='even'] | //tr[@class='odd']"):
-			location = each.xpath("./td[4]/text()").extract()[0]
-			workType = each.xpath("./td[2]/text()").extract()[0]
-			if location == '北京' and workType.find('技术类') != -1:
-				item = TencentItem()
-				item['positionName'] = each.xpath("./td[1]/a/text()").extract()[0]
-				item['positionLink'] = "http://hr.tencent.com/" + each.xpath("./td[1]/a/@href").extract()[0]
-				item['positionType'] = workType
-				item['peopleNum'] = each.xpath("./td[3]/text()").extract()[0]
-				item['publishTime'] = each.xpath("./td[5]/text()").extract()[0]
-				item['workLocation'] = location
-				yield item
+			location = each.xpath("./td[4]/text()").extract()
+			workType = each.xpath("./td[2]/text()").extract()
+			if len(workType) > 0 and len(location) > 0:
+				location = location[0]
+				workType = workType[0]
+				if location == '北京' and workType.find('技术类') != -1:
+					item = TencentItem()
+					item['positionName'] = each.xpath("./td[1]/a/text()").extract()[0]
+					item['positionLink'] = "http://hr.tencent.com/" + each.xpath("./td[1]/a/@href").extract()[0]
+					item['positionType'] = workType
+					item['peopleNum'] = each.xpath("./td[3]/text()").extract()[0]
+					item['publishTime'] = each.xpath("./td[5]/text()").extract()[0]
+					item['workLocation'] = location
+					yield item
 
-		if self.offset < 1680:
+		if self.offset < 2850:
 			self.offset += 10
 
 		yield scrapy.Request(self.url + str(self.offset), callback = self.parse)
