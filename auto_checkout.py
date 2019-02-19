@@ -82,6 +82,9 @@ def main():
     browser.quit()
 
 if __name__ == '__main__':
-    USER = sys.argv[1]
-    PASSWD = sys.argv[2]
-    main()
+    if len(sys.argv) < 3:
+        print("Usage: auto_checkout Username Password")
+    else:
+        USER = sys.argv[1]
+        PASSWD = sys.argv[2]
+        main()
