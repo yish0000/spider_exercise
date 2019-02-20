@@ -6,7 +6,8 @@ set /a PassDays-=%DaysAgo%
 call :DaysToDate %PassDays% DstYear DstMonth DstDay
 set DstDate=%DstYear%/%DstMonth%/%DstDay%
 set /a num=%RANDOM%%%60
-schtasks /Create /tn checkin /sc once /sd %DstDate% /st 09:%num% /tr "D:\Project\python\auto_checkout.exe shizhenhua yish8866983"
+schtasks /Create /f /tn checkin /sc once /sd %DstDate% /st 09:%num% /tr "D:\Project\python\auto_checkout.exe shizhenhua yish8866983"
+pause
 goto :eof
 
 :DateToDays %yy% %mm% %dd% days
