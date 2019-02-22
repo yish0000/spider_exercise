@@ -1,6 +1,7 @@
 @echo off
 
 set DaysAgo=-1
+if %date:~-2% == ÷‹ŒÂ (set DaysAgo=-3)
 call :DateToDays %date:~0,4% %date:~5,2% %date:~8,2% PassDays
 set /a PassDays-=%DaysAgo%
 call :DaysToDate %PassDays% DstYear DstMonth DstDay
