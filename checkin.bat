@@ -1,5 +1,8 @@
 @echo off
 
+set USERNAME=shizhenhua
+set PASSWORD=yish8866983
+
 set DaysAgo=-1
 if %date:~-2% == ÷‹ŒÂ (set DaysAgo=-3)
 call :DateToDays %date:~0,4% %date:~5,2% %date:~8,2% PassDays
@@ -8,8 +11,8 @@ call :DaysToDate %PassDays% DstYear DstMonth DstDay
 set DstDate=%DstYear%/%DstMonth%/%DstDay%
 set /a num=%RANDOM%%%60
 if %num% lss 10 (set num=0%num%)
-echo schtasks /Create /f /tn checkin /sc once /sd %DstDate% /st 09:%num% /tr "D:\Project\python\auto_checkout.exe shizhenhua yish8866983"
-schtasks /Create /f /tn checkin /sc once /sd %DstDate% /st 09:%num% /tr "D:\Project\python\auto_checkout.exe shizhenhua yish8866983"
+echo schtasks /Create /f /tn checkin /sc once /sd %DstDate% /st 09:%num% /tr "D:\Project\python\auto_checkout.exe %USERNAME% %PASSWORD%"
+schtasks /Create /f /tn checkin /sc once /sd %DstDate% /st 09:%num% /tr "D:\Project\python\auto_checkout.exe %USERNAME% %PASSWORD%"
 pause
 goto :eof
 
